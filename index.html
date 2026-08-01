@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="专业平面设计师作品集，展示品牌设计、海报设计、UI设计等作品">
+  <meta name="keywords" content="平面设计,品牌设计,海报设计,UI设计,作品集">
+  <meta name="author" content="Designer Portfolio">
+  <title>设计师作品集 | Designer Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1a1a1a',
+            secondary: '#2a2a2a',
+            accent: '#f59e0b',
+            light: '#f5f5f5',
+            muted: '#6b7280',
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          screens: {
+            'sm': '360px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0d1117;
+      color: #ffffff;
+    }
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #ffffff 0%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .image-zoom {
+      transition: transform 0.4s ease;
+    }
+    .card-hover:hover .image-zoom {
+      transform: scale(1.05);
+    }
+    .nav-scroll {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-scroll.scrolled {
+      background-color: rgba(13, 17, 23, 0.8);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+      color: #ffffff;
+    }
+    .nav-link {
+      position: relative;
+      font-size: 0.875rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.5rem 0;
+      transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #f59e0b;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .modal-backdrop {
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-content {
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .pagination-btn {
+      transition: all 0.2s ease;
+    }
+    .pagination-btn:hover {
+      background-color: #f59e0b;
+      color: #ffffff;
+    }
+    .pagination-btn.active {
+      background-color: #f59e0b;
+      color: #ffffff;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d1117;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #30363d;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #484f58;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <header id="header" class="nav-scroll fixed top-0 left-0 right-0 z-50 px-6 text-white">
+    <div class="max-w-7xl mx-auto flex items-center justify-center py-5 relative">
+      <!-- Logo -->
+      <a href="#home" class="absolute left-0 font-display text-xl tracking-wider font-light hover:text-accent transition-colors">
+        Jwel <span class="text-accent font-medium">Van</span>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-10">
+        <a href="#home" class="nav-link active">首页</a>
+        <a href="#portfolio" class="nav-link">作品集</a>
+        <a href="#about" class="nav-link">关于我</a>
+        <a href="#contact" class="nav-link">联系我</a>
+      </nav>
+      
+      <!-- Mobile Menu Button -->
+      <button id="menu-btn" class="md:hidden absolute right-0 w-10 h-10 flex flex-col items-center justify-center gap-1.5" aria-label="Toggle menu">
+        <span class="block w-5 h-px bg-current transition-all"></span>
+        <span class="block w-5 h-px bg-current transition-all"></span>
+        <span class="block w-3 h-px bg-current transition-all"></span>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-[#0d1117]/95 backdrop-blur-xl border-t border-[#30363d]/50 py-6 px-6">
+      <nav class="flex flex-col space-y-5">
+        <a href="#home" class="nav-link block text-center">首页</a>
+        <a href="#portfolio" class="nav-link block text-center">作品集</a>
+        <a href="#about" class="nav-link block text-center">关于我</a>
+        <a href="#contact" class="nav-link block text-center">联系我</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,rgba(34,34,34,0.8)_10%,rgba(0,0,0,0.95)_60%)]"></div>
+      <canvas id="particle-canvas" class="absolute inset-0"></canvas>
+      <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        <p class="text-gray-400 text-sm uppercase tracking-widest mb-4 fade-in">专业平面设计师</p>
+        <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 fade-in" style="animation-delay: 0.1s;">
+          创造<br><span class="text-gradient">视觉之美</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 fade-in" style="animation-delay: 0.2s;">
+          专注于平面设计，用创意与技术为品牌赋予独特价值
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in" style="animation-delay: 0.3s;">
+          <a href="#portfolio" class="px-8 py-4 bg-accent text-white font-medium rounded-full hover:bg-amber-600 transition-all duration-300">
+            查看作品集
+          </a>
+          <a href="#contact" class="px-8 py-4 border border-white/30 text-white font-medium rounded-full hover:bg-white hover:text-black transition-all duration-300">
+            联系我
+          </a>
+        </div>
+        <div class="mt-16 flex items-center justify-center gap-12 fade-in" style="animation-delay: 0.4s;">
+          <div class="text-center">
+            <div class="font-display text-3xl font-bold text-white">3+</div>
+            <div class="text-gray-500 text-sm">年设计经验</div>
+          </div>
+          <div class="w-px h-12 bg-[#30363d]"></div>
+          <div class="text-center">
+            <div class="font-display text-3xl font-bold text-white">200+</div>
+            <div class="text-gray-500 text-sm">完成项目</div>
+          </div>
+          <div class="w-px h-12 bg-[#30363d]"></div>
+          <div class="text-center">
+            <div class="font-display text-3xl font-bold text-white">50+</div>
+            <div class="text-gray-500 text-sm">合作品牌</div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <a href="#featured" class="text-gray-500 hover:text-accent transition-colors">
+          <i class="fas fa-chevron-down text-2xl"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== 精选作品版块 ===== -->
+    <!-- 如何添加/替换图片：
+         1. 每张作品卡片对应一个 <div class="portfolio-card ..."> 结构
+         2. 图片在 <img src="..." alt="..."> 标签中，替换 src 属性的值即可更换图片
+         3. 图片建议使用 16:9 横屏比例（与 aspect-video 类对应），如 1920x1080px
+         4. 本地图片：将图片放入项目文件夹，src 写相对路径，例如 src="./images/work1.jpg"
+         5. 网络图片：直接填写完整的图片URL地址
+         6. 如需新增作品，复制整个 portfolio-card 代码块，修改 data-id、图片地址、标题和描述即可 -->
+    <section id="portfolio" class="py-24 px-6 bg-[#0d1117]">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="text-gray-400 text-sm uppercase tracking-widest mb-4">全部作品</p>
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6">Portfolio</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">浏览我的完整作品集，涵盖品牌设计、海报设计、UI设计等多个领域</p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
+          <button class="filter-btn active px-6 py-2 rounded-full bg-accent text-white font-medium transition-all" data-category="all">全部</button>
+          <button class="filter-btn px-6 py-2 rounded-full border border-[#30363d] text-gray-300 font-medium hover:border-accent hover:text-accent transition-all" data-category="brand">品牌设计</button>
+          <button class="filter-btn px-6 py-2 rounded-full border border-[#30363d] text-gray-300 font-medium hover:border-accent hover:text-accent transition-all" data-category="poster">海报设计</button>
+          <button class="filter-btn px-6 py-2 rounded-full border border-[#30363d] text-gray-300 font-medium hover:border-accent hover:text-accent transition-all" data-category="ui">UI设计</button>
+          <button class="filter-btn px-6 py-2 rounded-full border border-[#30363d] text-gray-300 font-medium hover:border-accent hover:text-accent transition-all" data-category="print">印刷设计</button>
+        </div>
+
+        <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        </div>
+
+        <div id="pagination" class="flex items-center justify-center gap-4 mt-12">
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 px-6 bg-[#161b22]">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="text-gray-400 text-sm uppercase tracking-widest mb-4">专业专长</p>
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6">Design Expertise</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center p-8 bg-[#161b22]/80 rounded-2xl hover:bg-[#21262d] transition-colors">
+            <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-palette text-accent text-2xl"></i>
+            </div>
+            <h3 class="font-display text-xl font-semibold text-white mb-3">品牌设计</h3>
+            <p class="text-gray-400 text-sm">从品牌策略到视觉识别，打造独特品牌形象</p>
+          </div>
+          <div class="text-center p-8 bg-[#161b22]/80 rounded-2xl hover:bg-[#21262d] transition-colors">
+            <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-image text-accent text-2xl"></i>
+            </div>
+            <h3 class="font-display text-xl font-semibold text-white mb-3">海报设计</h3>
+            <p class="text-gray-400 text-sm">创意海报与宣传物料设计，传递品牌价值</p>
+          </div>
+          <div class="text-center p-8 bg-[#161b22]/80 rounded-2xl hover:bg-[#21262d] transition-colors">
+            <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-mobile-alt text-accent text-2xl"></i>
+            </div>
+            <h3 class="font-display text-xl font-semibold text-white mb-3">UI/UX设计</h3>
+            <p class="text-gray-400 text-sm">用户体验优先的界面设计，提升产品可用性</p>
+          </div>
+          <div class="text-center p-8 bg-[#161b22]/80 rounded-2xl hover:bg-[#21262d] transition-colors">
+            <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i class="fas fa-print text-accent text-2xl"></i>
+            </div>
+            <h3 class="font-display text-xl font-semibold text-white mb-3">印刷设计</h3>
+            <p class="text-gray-400 text-sm">画册、名片、包装等印刷品的专业设计</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="py-24 px-6 bg-[#0d1117]">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div class="relative">
+            <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
+              <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=professional%20creative%20designer%20portrait%20modern%20studio%20background%20artistic%20lighting%20minimalist%20style&image_size=portrait_4_5" alt="设计师照片" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-accent rounded-2xl flex items-center justify-center">
+              <div class="text-center">
+                <div class="font-display text-3xl font-bold text-white">8+</div>
+                <div class="text-white/80 text-xs">年经验</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="text-gray-400 text-sm uppercase tracking-widest mb-4">关于我</p>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6">About Me</h2>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+              我是一名专注于视觉设计领域的平面设计师，拥有超过8年的专业设计经验。我相信好的设计不仅仅是美观的外表，更是能够有效传达品牌价值、解决问题的有力工具。
+            </p>
+            <p class="text-gray-400 mb-8 leading-relaxed">
+              我的设计理念是"简约而不简单"，注重细节与用户体验的平衡。我擅长将复杂的信息转化为清晰、直观的视觉语言，帮助品牌在激烈的市场竞争中脱颖而出。
+            </p>
+            <div class="grid grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-semibold text-white mb-2">教育背景</h4>
+                <p class="text-gray-400 text-sm">中央美术学院<br>视觉传达设计专业</p>
+              </div>
+              <div>
+                <h4 class="font-semibold text-white mb-2">工作经历</h4>
+                <p class="text-gray-400 text-sm">知名设计机构首席设计师<br>独立设计师</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-24">
+          <div class="text-center mb-16">
+            <p class="text-gray-400 text-sm uppercase tracking-widest mb-4">专业技能</p>
+            <h2 class="font-display text-4xl font-bold text-white">Skills</h2>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div class="text-center p-6 bg-[#161b22] rounded-xl hover:bg-[#21262d] transition-colors">
+              <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i class="fab fa-figma text-accent"></i>
+              </div>
+              <span class="text-sm font-medium text-white">Figma</span>
+            </div>
+            <div class="text-center p-6 bg-[#161b22] rounded-xl hover:bg-[#21262d] transition-colors">
+              <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i class="fab fa-sketch text-accent"></i>
+              </div>
+              <span class="text-sm font-medium text-white">Sketch</span>
+            </div>
+            <div class="text-center p-6 bg-[#161b22] rounded-xl hover:bg-[#21262d] transition-colors">
+              <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i class="fab fa-adobe text-accent"></i>
+              </div>
+              <span class="text-sm font-medium text-white">Adobe</span>
+            </div>
+            <div class="text-center p-6 bg-[#161b22] rounded-xl hover:bg-[#21262d] transition-colors">
+              <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i class="fas fa-palette text-accent"></i>
+              </div>
+              <span class="text-sm font-medium text-white">色彩理论</span>
+            </div>
+            <div class="text-center p-6 bg-[#161b22] rounded-xl hover:bg-[#21262d] transition-colors">
+              <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i class="fas fa-font text-accent"></i>
+              </div>
+              <span class="text-sm font-medium text-white">字体设计</span>
+            </div>
+            <div class="text-center p-6 bg-[#161b22] rounded-xl hover:bg-[#21262d] transition-colors">
+              <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i class="fas fa-mobile-alt text-accent"></i>
+              </div>
+              <span class="text-sm font-medium text-white">响应式设计</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-24 px-6 bg-[#0d1117]">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="text-gray-400 text-sm uppercase tracking-widest mb-4">联系我</p>
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6">Get in Touch</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">有项目合作意向？欢迎随时联系我，期待与您共同创造精彩</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div>
+            <form id="contact-form" class="space-y-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-white mb-2">姓名</label>
+                <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-xl border border-[#30363d] bg-[#161b22] text-white focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all" placeholder="您的姓名">
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-white mb-2">邮箱</label>
+                <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-xl border border-[#30363d] bg-[#161b22] text-white focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all" placeholder="您的邮箱">
+              </div>
+              <div>
+                <label for="subject" class="block text-sm font-medium text-white mb-2">主题</label>
+                <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded-xl border border-[#30363d] bg-[#161b22] text-white focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all" placeholder="项目主题">
+              </div>
+              <div>
+                <label for="message" class="block text-sm font-medium text-white mb-2">留言</label>
+                <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-xl border border-[#30363d] bg-[#161b22] text-white focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all resize-none" placeholder="请描述您的项目需求..."></textarea>
+              </div>
+              <button type="submit" class="w-full px-8 py-4 bg-accent text-white font-medium rounded-xl hover:bg-amber-600 transition-all duration-300 flex items-center justify-center gap-2">
+                <i class="fas fa-paper-plane"></i> 发送消息
+              </button>
+            </form>
+          </div>
+          <div class="flex flex-col justify-center">
+            <div class="space-y-8">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-map-marker-alt text-accent"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-white mb-1">地址</h4>
+                  <p class="text-gray-400">北京市朝阳区创意设计园区</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-envelope text-accent"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-white mb-1">邮箱</h4>
+                  <p class="text-gray-400">hello@designer.com</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-phone text-accent"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-white mb-1">电话</h4>
+                  <p class="text-gray-400">+86 138 8888 8888</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-12">
+              <h4 class="font-semibold text-white mb-4">关注我</h4>
+              <div class="flex items-center gap-4">
+                <a href="#" class="w-10 h-10 bg-[#30363d] rounded-full flex items-center justify-center hover:bg-accent hover:text-white text-gray-400 transition-all">
+                  <i class="fab fa-behance"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-[#30363d] rounded-full flex items-center justify-center hover:bg-accent hover:text-white text-gray-400 transition-all">
+                  <i class="fab fa-dribbble"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-[#30363d] rounded-full flex items-center justify-center hover:bg-accent hover:text-white text-gray-400 transition-all">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-[#30363d] rounded-full flex items-center justify-center hover:bg-accent hover:text-white text-gray-400 transition-all">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-[#0d1117] text-white py-16 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+          <div>
+            <h3 class="font-display text-2xl font-semibold mb-4">Designer</h3>
+            <p class="text-white/60 text-sm">专业平面设计师，专注于品牌设计、海报设计与UI/UX设计，用创意与技术为品牌赋予独特价值。</p>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">快速链接</h4>
+            <ul class="space-y-3">
+              <li><a href="#home" class="text-white/60 hover:text-white text-sm transition-colors">首页</a></li>
+              <li><a href="#portfolio" class="text-white/60 hover:text-white text-sm transition-colors">作品集</a></li>
+              <li><a href="#about" class="text-white/60 hover:text-white text-sm transition-colors">关于我</a></li>
+              <li><a href="#contact" class="text-white/60 hover:text-white text-sm transition-colors">联系我</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">联系方式</h4>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-2 text-white/60 text-sm"><i class="fas fa-envelope"></i> hello@designer.com</li>
+              <li class="flex items-center gap-2 text-white/60 text-sm"><i class="fas fa-phone"></i> +86 138 8888 8888</li>
+              <li class="flex items-center gap-2 text-white/60 text-sm"><i class="fas fa-map-marker-alt"></i> 北京市朝阳区创意设计园区</li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p class="text-white/40 text-sm">© 2024 Designer Portfolio. All rights reserved.</p>
+          <div class="flex items-center gap-4">
+            <a href="#" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-behance"></i></a>
+            <a href="#" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-dribbble"></i></a>
+            <a href="#" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-white/40 hover:text-white transition-colors"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="image-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
+      <div class="modal-backdrop absolute inset-0 bg-black/90" id="modal-backdrop"></div>
+      <div class="modal-content relative z-10 max-w-5xl max-h-[90vh] p-4">
+        <button id="modal-close" class="absolute -top-12 right-0 text-white hover:text-accent transition-colors" aria-label="Close modal">
+          <i class="fas fa-times text-2xl"></i>
+        </button>
+        <img id="modal-image" src="" alt="" class="max-w-full max-h-[85vh] object-contain rounded-lg">
+        <div class="mt-4 text-center">
+          <h3 id="modal-title" class="font-display text-xl font-semibold text-white mb-2"></h3>
+          <p id="modal-category" class="text-white/60 text-sm"></p>
+          <p id="modal-description" class="text-white/40 text-sm mt-2"></p>
+        </div>
+      </div>
+    </div>
+
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-[#161b22] border border-[#30363d] text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible hover:bg-accent hover:border-accent transition-all z-40">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+      class ParticleSystem {
+        constructor() {
+          this.canvas = document.getElementById('particle-canvas');
+          this.ctx = this.canvas.getContext('2d');
+          this.particles = [];
+          this.mouse = { x: null, y: null, radius: 120 };
+          this.isMobile = window.innerWidth < 768;
+          this.particleCount = this.isMobile ? 80 : 200;
+          this.init();
+        }
+        
+        init() {
+          this.resize();
+          window.addEventListener('resize', () => this.resize());
+          window.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+          window.addEventListener('mouseleave', () => this.handleMouseLeave());
+          window.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: true });
+          window.addEventListener('touchend', () => this.handleMouseLeave());
+          this.createParticles();
+          this.animate();
+        }
+        
+        resize() {
+          this.canvas.width = window.innerWidth;
+          this.canvas.height = window.innerHeight;
+          for (const p of this.particles) {
+            p.x = Math.max(p.size, Math.min(this.canvas.width - p.size, p.x));
+            p.y = Math.max(p.size, Math.min(this.canvas.height - p.size, p.y));
+          }
+        }
+        
+        handleMouseMove(e) {
+          const rect = this.canvas.getBoundingClientRect();
+          this.mouse.x = e.clientX - rect.left;
+          this.mouse.y = e.clientY - rect.top;
+        }
+        
+        handleTouchMove(e) {
+          const rect = this.canvas.getBoundingClientRect();
+          const touch = e.touches[0];
+          this.mouse.x = touch.clientX - rect.left;
+          this.mouse.y = touch.clientY - rect.top;
+        }
+        
+        handleMouseLeave() {
+          this.mouse.x = null;
+          this.mouse.y = null;
+        }
+        
+        createParticles() {
+          this.particles = [];
+          for (let i = 0; i < this.particleCount; i++) {
+            const size = Math.random() * 6 + 2;
+            this.particles.push({
+              x: Math.random() * this.canvas.width,
+              y: Math.random() * this.canvas.height,
+              vx: (Math.random() - 0.5) * 0.8,
+              vy: (Math.random() - 0.5) * 0.8,
+              size: size,
+              baseSize: size,
+              color: this.getRandomColor(),
+              opacity: Math.random() * 0.6 + 0.3,
+              baseOpacity: Math.random() * 0.6 + 0.3
+            });
+          }
+        }
+        
+        getRandomColor() {
+          const colors = ['#f59e0b', '#fbbf24', '#fcd34d', '#ffffff', '#9ca3af'];
+          return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        update() {
+          const friction = 0.98;
+          const bounce = 0.7;
+          const mouseForce = 0.03;
+          const repulsionRadius = 150;
+          
+          for (let i = 0; i < this.particles.length; i++) {
+            const p = this.particles[i];
+            
+            if (this.mouse.x !== null && this.mouse.y !== null) {
+              const dx = p.x - this.mouse.x;
+              const dy = p.y - this.mouse.y;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+              
+              if (distance < repulsionRadius && distance > 0) {
+                const force = (repulsionRadius - distance) / repulsionRadius;
+                p.vx += (dx / distance) * force * mouseForce * 15;
+                p.vy += (dy / distance) * force * mouseForce * 15;
+                
+                p.size = p.baseSize * (1 + force * 0.5);
+                p.opacity = Math.min(1, p.baseOpacity + force * 0.3);
+              } else {
+                p.size = p.baseSize + (p.size - p.baseSize) * 0.1;
+                p.opacity = p.baseOpacity + (p.opacity - p.baseOpacity) * 0.1;
+              }
+            }
+            
+            for (let j = i + 1; j < this.particles.length; j++) {
+              const p2 = this.particles[j];
+              const dx = p.x - p2.x;
+              const dy = p.y - p2.y;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+              const minDist = p.size + p2.size + 10;
+              
+              if (distance < minDist && distance > 0) {
+                const overlap = minDist - distance;
+                const nx = dx / distance;
+                const ny = dy / distance;
+                
+                const totalMass = p.size + p2.size;
+                const pMass = p.size / totalMass;
+                const p2Mass = p2.size / totalMass;
+                
+                p.x += nx * overlap * p2Mass;
+                p.y += ny * overlap * p2Mass;
+                p2.x -= nx * overlap * pMass;
+                p2.y -= ny * overlap * pMass;
+                
+                const dvx = p.vx - p2.vx;
+                const dvy = p.vy - p2.vy;
+                const dvn = dvx * nx + dvy * ny;
+                
+                if (dvn < 0) {
+                  p.vx -= dvn * nx * bounce * p2Mass;
+                  p.vy -= dvn * ny * bounce * p2Mass;
+                  p2.vx += dvn * nx * bounce * pMass;
+                  p2.vy += dvn * ny * bounce * pMass;
+                }
+              }
+            }
+            
+            p.vx *= friction;
+            p.vy *= friction;
+            
+            p.x += p.vx;
+            p.y += p.vy;
+            
+            if (p.x - p.size < 0) {
+              p.x = p.size;
+              p.vx *= -bounce;
+            }
+            if (p.x + p.size > this.canvas.width) {
+              p.x = this.canvas.width - p.size;
+              p.vx *= -bounce;
+            }
+            if (p.y - p.size < 0) {
+              p.y = p.size;
+              p.vy *= -bounce;
+            }
+            if (p.y + p.size > this.canvas.height) {
+              p.y = this.canvas.height - p.size;
+              p.vy *= -bounce;
+            }
+          }
+        }
+        
+        draw() {
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          
+          for (const p of this.particles) {
+            this.ctx.beginPath();
+            this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            
+            const gradient = this.ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+            gradient.addColorStop(0, p.color);
+            gradient.addColorStop(0.4, p.color);
+            gradient.addColorStop(1, 'transparent');
+            
+            this.ctx.fillStyle = gradient;
+            this.ctx.globalAlpha = p.opacity;
+            this.ctx.fill();
+            
+            this.ctx.beginPath();
+            this.ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2);
+            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            this.ctx.fill();
+            
+            this.ctx.globalAlpha = 1;
+          }
+          
+          for (let i = 0; i < this.particles.length; i++) {
+            for (let j = i + 1; j < this.particles.length; j++) {
+              const p1 = this.particles[i];
+              const p2 = this.particles[j];
+              const dx = p1.x - p2.x;
+              const dy = p1.y - p2.y;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+              
+              if (distance < 120) {
+                this.ctx.beginPath();
+                this.ctx.moveTo(p1.x, p1.y);
+                this.ctx.lineTo(p2.x, p2.y);
+                this.ctx.strokeStyle = `rgba(245, 158, 11, ${(120 - distance) / 120 * 0.2})`;
+                this.ctx.lineWidth = 0.5;
+                this.ctx.stroke();
+              }
+            }
+          }
+        }
+        
+        animate() {
+          this.update();
+          this.draw();
+          requestAnimationFrame(() => this.animate());
+        }
+      }
+      
+      function initParticleSystem() {
+        new ParticleSystem();
+      }
+      
+      /* ===== 作品集数据配置 =====
+         这里定义了所有作品的数据，完整作品集版块（Portfolio）通过此数组动态渲染
+         每个作品对象包含：
+           - id: 作品唯一编号（数字，不能重复）
+           - title: 作品标题
+           - category: 分类标识（brand=品牌设计, poster=海报设计, ui=UI设计, print=印刷设计）
+           - categoryName: 分类显示名称
+           - description: 作品描述
+           - image: 作品图片地址（替换为你自己的图片路径即可）
+         
+         新增作品：复制一条现有数据，修改 id、title、category、categoryName、description、image 即可
+         图片建议使用 4:3 横屏比例（landscape_4_3），如 1600x1200px
+      */
+
+      /* ============================================================
+       * 【作品集图片配置区 - 请在此处修改你的图片链接】
+       * ============================================================
+       * 
+       * 📁 本地图片：
+       *   1. 在 index.html 同级目录下创建 "PIC" 文件夹
+       *   2. 将图片放入该文件夹
+       *   3. 下面 image 字段填写相对路径，如：'./PIC/1.png'
+       * 
+       * 🌐 网络图片：
+       *   直接将 image 字段改为图片的完整 URL 地址，如：
+       *   image: 'https://example.com/my-photo.jpg'
+       * 
+       * 📝 每个作品字段说明：
+       *   - id:           编号（唯一，从1开始）
+       *   - title:        作品标题（会显示在卡片和弹窗中）
+       *   - category:     分类代码（brand/poster/ui/print）
+       *   - categoryName: 分类中文名（显示在卡片上）
+       *   - description:  作品描述
+       *   - image:        ⭐ 图片地址（修改这里即可）
+       * 
+       * 🗂️ 分类选项：
+       *   - brand  → 品牌设计
+       *   - poster → 海报设计
+       *   - ui     → UI设计
+       *   - print  → 印刷设计
+       * ============================================================ */
+
+      const portfolioData = [
+        // ===== 第1页（6个作品）=====
+        { id: 1,  title: 'THE DREW WAY',          category: 'poster',  categoryName: '海报设计', description: '为科技创新企业打造的完整品牌视觉系统，包括Logo、VI手册、品牌应用等', image: './PIC/1.png' },  // ← 修改图片
+        { id: 2,  title: '音乐节宣传海报',          category: 'poster', categoryName: '海报设计', description: '现代音乐节主题海报，融合潮流元素与艺术风格，极具视觉冲击力', image: './PIC/2.png' },  // ← 修改图片
+        { id: 3,  title: '移动应用界面',            category: 'poster',     categoryName: '海报设计',   description: '用户体验优先的移动应用界面设计方案，注重交互细节与视觉美感', image: './PIC/3.png' },  // ← 修改图片
+        { id: 4,  title: '高端餐厅品牌设计',        category: 'poster',  categoryName: '海报设计', description: '为米其林餐厅打造的高端品牌形象，传递精致与品味', image: './PIC/4.png' },  // ← 修改图片
+        { id: 5,  title: '艺术展览海报',            category: 'poster', categoryName: '海报设计', description: '当代艺术展览宣传海报，抽象艺术风格与现代设计的完美结合', image: './PIC/14.png' },  // ← 修改图片
+        { id: 6,  title: '电商平台界面',            category: 'poster',     categoryName: '海报设计',   description: '电商购物平台的完整界面设计，提升用户购物体验与转化率', image: './PIC/7.png' },  // ← 修改图片
+
+        // ===== 第2页（6个作品）=====
+        { id: 7,  title: '企业画册设计',            category: 'print',  categoryName: '印刷设计', description: '企业宣传画册设计，专业排版与高品质视觉呈现', image: './PIC/8.png' },  // ← 修改图片
+        { id: 8,  title: '咖啡品牌视觉',            category: 'brand',  categoryName: '品牌设计', description: '精品咖啡品牌的完整视觉识别系统，温暖舒适的品牌调性', image: './PIC/9.png' },  // ← 修改图片
+        { id: 9,  title: '环保主题海报',            category: 'poster', categoryName: '海报设计', description: '环保公益主题海报，用视觉传达环保理念与社会责任', image: './PIC/10.png' },  // ← 修改图片
+        { id: 10, title: '健康管理App',             category: 'ui',     categoryName: 'UI设计',   description: '健康管理移动应用界面，清新自然的设计风格', image: './PIC/11.png' }, // ← 修改图片
+        { id: 11, title: '品牌名片设计',            category: 'print',  categoryName: '海报设计', description: '高端商务名片设计，体现品牌个性与专业形象', image: './PIC/12.png' }, // ← 修改图片
+        { id: 12, title: '时尚品牌视觉',            category: 'brand',  categoryName: '品牌设计', description: '时尚服饰品牌的视觉识别系统，潮流与个性的完美展现', image: './PIC/13.png' }, // ← 修改图片
+
+        // ===== 第3页（3个作品）=====
+        { id: 13, title: '电影宣传海报',            category: 'poster', categoryName: '海报设计', description: '电影宣传海报设计，营造悬疑氛围与视觉张力', image: './PIC/14.png' }, // ← 修改图片
+        { id: 14, title: '金融App界面',             category: 'ui',     categoryName: 'UI设计',   description: '金融理财应用界面设计，专业稳重的视觉风格', image: './PIC/15.png' }, // ← 修改图片
+        { id: 15, title: '产品包装设计',            category: 'print',  categoryName: '印刷设计', description: '高端产品包装设计，提升产品附加值与品牌形象', image: './PIC/15.png' }, // ← 修改图片
+      ];
+
+      let currentCategory = 'all';
+      let currentPage = 1;
+      const itemsPerPage = 6;
+
+      function renderPortfolio(items) {
+        const grid = document.getElementById('portfolio-grid');
+        grid.innerHTML = '';
+        
+        items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'portfolio-card group card-hover bg-[#161b22] rounded-2xl overflow-hidden';
+          card.dataset.id = item.id;
+          card.innerHTML = `
+            <div class="relative overflow-hidden aspect-[4/3]">
+              <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover image-zoom">
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                <button class="view-btn bg-accent text-white px-6 py-3 rounded-full font-medium flex items-center gap-2" data-id="${item.id}">
+                  <i class="fas fa-eye"></i> 查看详情
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <span class="text-accent text-sm font-medium">${item.categoryName}</span>
+              <h3 class="font-display text-xl font-semibold text-white mt-2 mb-2">${item.title}</h3>
+              <p class="text-gray-400 text-sm line-clamp-2">${item.description}</p>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        attachViewListeners();
+      }
+
+      function renderPagination(totalItems) {
+        const pagination = document.getElementById('pagination');
+        pagination.innerHTML = '';
+        
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        
+        if (totalPages <= 1) return;
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = `pagination-btn px-4 py-2 rounded-full border border-[#30363d] text-gray-300 transition-all ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`;
+        prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        prevBtn.addEventListener('click', () => {
+          if (currentPage > 1) {
+            currentPage--;
+            loadPage();
+          }
+        });
+        pagination.appendChild(prevBtn);
+
+        for (let i = 1; i <= totalPages; i++) {
+          const pageBtn = document.createElement('button');
+          pageBtn.className = `pagination-btn px-4 py-2 rounded-full border border-[#30363d] text-gray-300 transition-all ${i === currentPage ? 'active' : ''}`;
+          pageBtn.textContent = i;
+          pageBtn.addEventListener('click', () => {
+            currentPage = i;
+            loadPage();
+          });
+          pagination.appendChild(pageBtn);
+        }
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = `pagination-btn px-4 py-2 rounded-full border border-[#30363d] text-gray-300 transition-all ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`;
+        nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        nextBtn.addEventListener('click', () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            loadPage();
+          }
+        });
+        pagination.appendChild(nextBtn);
+      }
+
+      function loadPage() {
+        let filteredItems = currentCategory === 'all' 
+          ? portfolioData 
+          : portfolioData.filter(item => item.category === currentCategory);
+        
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const paginatedItems = filteredItems.slice(startIndex, endIndex);
+        
+        renderPortfolio(paginatedItems);
+        renderPagination(filteredItems.length);
+      }
+
+      function attachViewListeners() {
+        const viewButtons = document.querySelectorAll('.view-btn');
+        viewButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const card = btn.closest('.portfolio-card');
+            const img = card.querySelector('img');
+            const category = card.querySelector('span').textContent;
+            const title = card.querySelector('h3').textContent;
+            const description = card.querySelector('p').textContent;
+            
+            openModal({
+              image: img.src,
+              title: title,
+              categoryName: category,
+              description: description
+            });
+          });
+        });
+      }
+
+      function openModal(item) {
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalCategory = document.getElementById('modal-category');
+        const modalDescription = document.getElementById('modal-description');
+        
+        modalImage.src = item.image;
+        modalImage.alt = item.title;
+        modalTitle.textContent = item.title;
+        modalCategory.textContent = item.categoryName;
+        modalDescription.textContent = item.description;
+        
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        const modal = document.getElementById('image-modal');
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        initParticleSystem();
+        loadPage();
+
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active', 'bg-accent', 'text-white'));
+            filterButtons.forEach(b => b.classList.add('border', 'border-[#30363d]', 'text-gray-300'));
+            btn.classList.add('active', 'bg-accent', 'text-white');
+            btn.classList.remove('border', 'border-[#30363d]', 'text-gray-300');
+            
+            currentCategory = btn.dataset.category;
+            currentPage = 1;
+            loadPage();
+          });
+        });
+
+        const modalClose = document.getElementById('modal-close');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        
+        modalClose.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', closeModal);
+        
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            closeModal();
+          }
+        });
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+          const lines = menuBtn.querySelectorAll('span');
+          if (!mobileMenu.classList.contains('hidden')) {
+            // 关闭状态
+            lines[0].style.transform = 'rotate(-45deg) translate(-2px, 2px)';
+            lines[1].style.opacity = '0';
+            lines[2].style.transform = 'rotate(45deg) translate(-1px, -1px)';
+            lines[2].style.width = '20px';
+          } else {
+            // 打开状态
+            lines[0].style.transform = '';
+            lines[1].style.opacity = '';
+            lines[2].style.transform = '';
+            lines[2].style.width = '';
+          }
+        });
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            const lines = menuBtn.querySelectorAll('span');
+            lines[0].style.transform = '';
+            lines[1].style.opacity = '';
+            lines[2].style.transform = '';
+            lines[2].style.width = '';
+          });
+        });
+
+        const header = document.getElementById('header');
+        const sections = document.querySelectorAll('section[id]');
+        
+        window.addEventListener('scroll', () => {
+          // 导航栏滚动效果
+          if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+          
+          // 导航项高亮
+          const scrollPos = window.scrollY + 200;
+          sections.forEach(section => {
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            const id = section.getAttribute('id');
+            const link = document.querySelector(`.nav-link[href="#${id}"]`);
+            
+            if (link) {
+              if (scrollPos >= top && scrollPos < top + height) {
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+              }
+            }
+          });
+        });
+
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 500) {
+            backToTopBtn.classList.remove('opacity-0', 'invisible');
+            backToTopBtn.classList.add('opacity-100', 'visible');
+          } else {
+            backToTopBtn.classList.add('opacity-0', 'invisible');
+            backToTopBtn.classList.remove('opacity-100', 'visible');
+          }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => {
+          observer.observe(element);
+        });
+
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const formData = new FormData(contactForm);
+          console.log('Form submitted:', Object.fromEntries(formData));
+          alert('感谢您的留言！我会尽快回复您。');
+          contactForm.reset();
+        });
+      });
+    </script>
