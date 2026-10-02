@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="联系专业平面设计师，项目合作与咨询">
+  <title>联系我 | Designer Portfolio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1a1a1a',
+            secondary: '#2a2a2a',
+            accent: '#f59e0b',
+            light: '#f5f5f5',
+            muted: '#6b7280',
+          },
+          fontFamily: {
+            display: ['Now', '"Microsoft YaHei"', '"PingFang SC"', '"SimHei"', 'sans-serif'],
+            sans: ['Inter', '"Microsoft YaHei"', '"PingFang SC"', 'system-ui', 'sans-serif'],
+          },
+          screens: {
+            'sm': '360px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- 全站共享样式：字体、变量、导航、按钮、表单、滚动条（本页无独有样式） -->
+  <link rel="stylesheet" href="assets/common.css">
+</head>
+
+<body class="antialiased">
+
+  <!-- ===== 导航栏 ===== -->
+  <header id="header" class="nav-scroll fixed top-0 left-0 right-0 z-50 py-2 px-6 text-white">
+    <div class="max-w-7xl mx-auto flex items-center relative">
+
+      <a href="index.html#home" class="flex items-center flex-shrink-0 relative z-10">
+        <img src="pic/Joy-left.png" alt="Jwel" class="h-8 md:h-12 w-auto object-contain" />
+      </a>
+
+      <!-- 桌面端导航 -->
+      <nav class="hidden md:flex items-center space-x-20 text-2xl absolute left-1/2 -translate-x-1/2">
+        <a href="index.html#home" class="nav-link font-display font-bold hover:text-amber-100 transition-colors">Home</a>
+        <a href="index.html#portfolio" class="nav-link font-display font-bold hover:text-amber-100 transition-colors">Portfolio</a>
+        <a href="about.html" class="nav-link font-display font-bold hover:text-amber-100 transition-colors">About</a>
+        <a href="contact.html" class="nav-link current font-display font-bold hover:text-amber-100 transition-colors">Contact</a>
+      </nav>
+
+      <!-- 移动端汉堡按钮 -->
+      <button id="menu-btn" class="md:hidden p-2 ml-auto" aria-label="Toggle menu">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- 移动端下拉菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-amber-500 border-t border-amber-600 shadow-lg py-4 px-6">
+      <nav class="flex flex-col space-y-4 text-lg">
+        <a href="index.html#home" class="nav-link font-display font-bold text-white hover:text-amber-100 transition-colors">Home</a>
+        <a href="index.html#portfolio" class="nav-link font-display font-bold text-white hover:text-amber-100 transition-colors">Portfolio</a>
+        <a href="about.html" class="nav-link font-display font-bold text-white hover:text-amber-100 transition-colors">About</a>
+        <a href="contact.html" class="nav-link current font-display font-bold text-white hover:text-amber-100 transition-colors">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== 联系我（独立页面） ===== -->
+    <section class="pt-36 pb-24 px-6 bg-[#0d1117] min-h-screen flex items-center">
+      <div class="max-w-7xl mx-auto w-full">
+        <div class="text-center mb-16">
+          <p class="text-accent/80 text-xs uppercase tracking-[0.3em] mb-4">联系我</p>
+          <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-5">Get in Touch</h1>
+          <div class="w-12 h-[2px] bg-accent mx-auto"></div>
+          <p class="text-gray-400 max-w-2xl mx-auto mt-6">有项目合作意向？欢迎随时联系我，期待与您共同创造精彩</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <!-- 联系表单 -->
+          <div>
+            <form id="contact-form" novalidate class="space-y-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-white mb-2">姓名</label>
+                <input type="text" id="name" name="name" class="form-input w-full px-4 py-3 rounded-xl border border-[#30363d] bg-[#161b22] text-white outline-none placeholder:text-gray-600" placeholder="您的姓名">
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-white mb-2">邮箱</label>
+                <input type="email" id="email" name="email" class="form-input w-full px-4 py-3 rounded-xl border border-[#30363d] bg-[#161b22] text-white outline-none placeholder:text-gray-600" placeholder="您的邮箱">
+              </div>
+              <div>
+                <label for="subject" class="block text-sm font-medium text-white mb-2">主题</label>
+                <input type="text" id="subject" name="subject" class="form-input w-full px-4 py-3 rounded-xl border border-[#30363d] bg-[#161b22] text-white outline-none placeholder:text-gray-600" placeholder="项目主题">
+              </div>
+              <div>
+                <label for="message" class="block text-sm font-medium text-white mb-2">留言</label>
+                <textarea id="message" name="message" rows="5" class="form-input w-full px-4 py-3 rounded-xl border border-[#30363d] bg-[#161b22] text-white outline-none resize-none placeholder:text-gray-600" placeholder="请描述您的项目需求..."></textarea>
+              </div>
+              <!-- 全局状态提示（成功/失败由 JS 填充） -->
+              <div id="form-status" role="status" aria-live="polite" class="hidden rounded-xl border px-4 py-3 text-sm leading-relaxed"></div>
+
+              <button type="submit" class="btn-primary w-full px-8 py-4 font-medium rounded-xl flex items-center justify-center gap-2">
+                <i class="fas fa-paper-plane"></i> 发送消息
+              </button>
+            </form>
+          </div>
+
+          <!-- 联系信息 -->
+          <div class="flex flex-col justify-center">
+            <div class="space-y-8">
+              <div class="group flex items-start gap-4">
+                <div class="w-12 h-12 bg-accent/15 border border-accent/30 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-accent group-hover:border-accent group-hover:scale-110">
+                  <i class="fas fa-map-marker-alt text-accent group-hover:text-white transition-colors duration-300"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-white mb-1">地址</h4>
+                  <p class="text-gray-400">浙江省温州市龙湾区蒲州街道</p>
+                </div>
+              </div>
+
+              <div class="group flex items-start gap-4">
+                <div class="w-12 h-12 bg-accent/15 border border-accent/30 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-accent group-hover:border-accent group-hover:scale-110">
+                  <i class="fas fa-envelope text-accent group-hover:text-white transition-colors duration-300"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-white mb-1">邮箱</h4>
+                  <a href="mailto:1023926598@qq.com" class="text-gray-400 hover:text-accent transition-colors">1023926598@qq.com</a>
+                </div>
+              </div>
+
+              <div class="group flex items-start gap-4">
+                <div class="w-12 h-12 bg-accent/15 border border-accent/30 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-accent group-hover:border-accent group-hover:scale-110">
+                  <i class="fas fa-phone text-accent group-hover:text-white transition-colors duration-300"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-white mb-1">电话</h4>
+                  <a href="tel:+8617816335673" class="text-gray-400 hover:text-accent transition-colors">+86 17816335673</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 社交媒体 -->
+            <div class="mt-12">
+              <h4 class="text-xs tracking-[0.25em] uppercase text-gray-500 mb-5">Follow Me</h4>
+              <div class="flex items-center gap-4">
+                <a href="#" aria-label="Behance" class="w-10 h-10 bg-[#30363d] rounded-full flex items-center justify-center hover:bg-accent hover:text-white hover:shadow-[0_8px_20px_-6px_rgba(245,158,11,0.5)] text-gray-400 transition-all">
+                  <i class="fab fa-behance"></i>
+                </a>
+                <a href="#" aria-label="Dribbble" class="w-10 h-10 bg-[#30363d] rounded-full flex items-center justify-center hover:bg-accent hover:text-white hover:shadow-[0_8px_20px_-6px_rgba(245,158,11,0.5)] text-gray-400 transition-all">
+                  <i class="fab fa-dribbble"></i>
+                </a>
+                <a href="#" aria-label="Instagram" class="w-10 h-10 bg-[#30363d] rounded-full flex items-center justify-center hover:bg-accent hover:text-white hover:shadow-[0_8px_20px_-6px_rgba(245,158,11,0.5)] text-gray-400 transition-all">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" aria-label="LinkedIn" class="w-10 h-10 bg-[#30363d] rounded-full flex items-center justify-center hover:bg-accent hover:text-white hover:shadow-[0_8px_20px_-6px_rgba(245,158,11,0.5)] text-gray-400 transition-all">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== 页脚 ===== -->
+  <footer class="bg-[#0d1117] text-white px-6">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 py-20 border-t border-[#30363d]">
+        <div class="md:col-span-5">
+          <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-6">Designer<span class="text-accent">.</span></h3>
+          <p class="text-white/40 text-sm leading-relaxed max-w-sm">
+            专业平面设计师，专注于品牌设计、海报设计与 UI/UX 设计，用创意与技术为品牌赋予独特价值。
+          </p>
+        </div>
+
+        <div class="md:col-span-3">
+          <h4 class="text-xs tracking-[0.25em] uppercase text-gray-500 mb-6">Sitemap</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html#home" class="text-sm text-white/55 hover:text-accent transition-colors duration-300">首页</a></li>
+            <li><a href="index.html#portfolio" class="text-sm text-white/55 hover:text-accent transition-colors duration-300">作品集</a></li>
+            <li><a href="about.html" class="text-sm text-white/55 hover:text-accent transition-colors duration-300">关于我</a></li>
+            <li><a href="contact.html" class="text-sm text-white/55 hover:text-accent transition-colors duration-300">联系我</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-4">
+          <h4 class="text-xs tracking-[0.25em] uppercase text-gray-500 mb-6">Contact</h4>
+          <ul class="space-y-5">
+            <li>
+              <span class="block text-xs text-gray-600 mb-1">邮箱</span>
+              <a href="mailto:1023926598@qq.com" class="text-sm text-white/70 hover:text-accent transition-colors duration-300">1023926598@qq.com</a>
+            </li>
+            <li>
+              <span class="block text-xs text-gray-600 mb-1">电话</span>
+              <a href="tel:+8617816335673" class="text-sm text-white/70 hover:text-accent transition-colors duration-300">+86 17816335673</a>
+            </li>
+            <li>
+              <span class="block text-xs text-gray-600 mb-1">地址</span>
+              <span class="text-sm text-white/70">浙江省温州市龙湾区</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-[#30363d] py-8 flex flex-col md:flex-row items-center justify-between gap-5">
+        <p class="text-white/30 text-xs tracking-wide">© 2024 Designer Portfolio. All rights reserved.</p>
+        <div class="flex items-center gap-6">
+          <a href="#" aria-label="Behance" class="text-sm text-white/30 hover:text-accent transition-colors duration-300"><i class="fab fa-behance"></i></a>
+          <a href="#" aria-label="Dribbble" class="text-sm text-white/30 hover:text-accent transition-colors duration-300"><i class="fab fa-dribbble"></i></a>
+          <a href="#" aria-label="Instagram" class="text-sm text-white/30 hover:text-accent transition-colors duration-300"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn" class="text-sm text-white/30 hover:text-accent transition-colors duration-300"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ===== 回到顶部 ===== -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-[#161b22] border border-[#30363d] text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible hover:bg-accent hover:border-accent hover:shadow-[0_8px_24px_-6px_rgba(245,158,11,0.5)] transition-all z-40">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    /* =============================================================
+       联系表单处理
+       - 必填校验：姓名 / 邮箱 / 留言；主题可选
+       - 邮箱格式校验、字段内联报错、按钮 loading 防重复提交
+       - 真实发送：把下方 FORM_ENDPOINT 改为第三方表单服务地址
+         （如 Formspree：https://formspree.io/f/xxxx）即可启用真实投递；
+         留空时为演示模式（模拟网络延迟，不实际发请求）
+       ============================================================= */
+    (function () {
+      const FORM_ENDPOINT = '';
+
+      const form = document.getElementById('contact-form');
+      if (!form) return;
+
+      const statusBox = document.getElementById('form-status');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const btnLabel = submitBtn.innerHTML;
+      const nameEl = form.elements.name;
+      const emailEl = form.elements.email;
+      const messageEl = form.elements.message;
+      const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      function setStatus(type, msg) {
+        statusBox.hidden = false;
+        statusBox.className =
+          'rounded-xl border px-4 py-3 text-sm leading-relaxed ' +
+          (type === 'success'
+            ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300'
+            : 'border-red-500/40 bg-red-500/10 text-red-300');
+        statusBox.textContent = msg;
+      }
+      function clearStatus() {
+        statusBox.hidden = true;
+        statusBox.textContent = '';
+      }
+
+      function setError(input, msg) {
+        input.classList.add('is-error');
+        let tip = input.parentElement.querySelector('.field-error');
+        if (!tip) {
+          tip = document.createElement('p');
+          tip.className = 'field-error text-red-400 text-xs mt-2';
+          input.parentElement.appendChild(tip);
+        }
+        tip.textContent = msg;
+      }
+      function clearError(input) {
+        input.classList.remove('is-error');
+        const tip = input.parentElement.querySelector('.field-error');
+        if (tip) tip.remove();
+      }
+
+      // 开始输入即清除该字段的错误提示
+      [nameEl, emailEl, messageEl].forEach(el =>
+        el.addEventListener('input', () => clearError(el))
+      );
+
+      function validate() {
+        let ok = true;
+        if (!nameEl.value.trim()) { setError(nameEl, '请填写您的姓名'); ok = false; }
+        const email = emailEl.value.trim();
+        if (!email) {
+          setError(emailEl, '请填写邮箱'); ok = false;
+        } else if (!emailReg.test(email)) {
+          setError(emailEl, '邮箱格式不正确，例如 name@example.com'); ok = false;
+        }
+        if (!messageEl.value.trim()) { setError(messageEl, '请简单描述您的项目需求'); ok = false; }
+        return ok;
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        clearStatus();
+        if (!validate()) {
+          setStatus('error', '请检查并补全标红的字段后再发送。');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 发送中...';
+
+        try {
+          if (FORM_ENDPOINT) {
+            const res = await fetch(FORM_ENDPOINT, {
+              method: 'POST',
+              headers: { Accept: 'application/json' },
+              body: new FormData(form)
+            });
+            if (!res.ok) throw new Error('提交失败');
+          } else {
+            // 演示模式：模拟请求耗时
+            await new Promise(resolve => setTimeout(resolve, 700));
+          }
+          setStatus('success', '感谢您的留言！消息已收到，我会尽快回复您。');
+          form.reset();
+        } catch (err) {
+          setStatus('error', '发送失败，请稍后重试，或直接发邮件至 1023926598@qq.com。');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = btnLabel;
+        }
+      });
+    })();
+  </script>
+
+  <!-- 全站共享交互：导航滚动加深、移动菜单、回到顶部 -->
+  <script src="assets/common.js"></script>
+</body>
+</html>

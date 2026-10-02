@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="专业平面设计师作品集，展示品牌设计、海报设计、UI设计等作品">
+  <meta name="keywords" content="平面设计,品牌设计,海报设计,UI设计,作品集">
+  <meta name="author" content="Designer Portfolio">
+  <title>设计师作品集 | Designer Portfolio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <!-- ============================================================
+       字体配置：
+       —— 默认使用 Google Fonts（在线加载）——
+       如果想换成【本地字体】，按下面步骤操作：
+
+       步骤 1：把 .ttf / .otf / .woff2 字体文件放到项目目录，
+               建议在 d:\Trea\web_2\ 下新建一个 fonts 文件夹，
+               例如：d:\Trea\web_2\fonts\MyFont-Regular.ttf
+
+       步骤 2：把下面这行（Google Fonts 链接）注释掉或删掉，
+               然后在 <style> 里用 @font-face 声明本地字体，
+               具体写法见下方 <style> 开头的注释模板。
+
+       步骤 3：改 tailwind config 里的 fontFamily.display / fontFamily.sans
+               或者改 CSS 里的 body 和 .font-display。
+       ============================================================ -->
+  <!-- Google Fonts（在线加载，如果要用本地字体就把这行注释掉） -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"> -->
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1a1a1a',
+            secondary: '#2a2a2a',
+            accent: '#f59e0b',
+            light: '#f5f5f5',
+            muted: '#6b7280',
+          },
+          /* ---------- 字体配置 ----------
+           * display: 标题/大字体（Hero 标题、区块标题等，使用 .font-display 类）
+           * sans:   正文/UI 字体（按钮、描述、导航等，Tailwind 默认 font-sans）
+           *
+           * 换成本地字体后，把数组里第一个字体名改成你 @font-face 里声明的 font-family 名，
+           * 后面的 serif / sans-serif 是系统 fallback（找不到前面的字体时用）。
+           */
+          fontFamily: {
+            /* Now 字体家族 + 中文黑体 fallback（微软雅黑 / 黑体 / 苹方） */
+            display: ['Now', '"Microsoft YaHei"', '"PingFang SC"', '"SimHei"', 'sans-serif'],
+            sans: ['Inter', '"Microsoft YaHei"', '"PingFang SC"', 'system-ui', 'sans-serif'],
+          },
+          screens: {
+            'sm': '360px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- 全站共享样式：字体、变量、导航、按钮、表单、滚动条 -->
+  <link rel="stylesheet" href="assets/common.css">
+
+  <style>
+    /* 以下为首页独有样式（公共样式见 assets/common.css） */
+
+    /* ===== 文字渐变 ===== */
+    .text-gradient {
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ===== 卡片悬停效果 ===== */
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px -12px rgba(245, 158, 11, 0.28);
+      border-color: rgba(245, 158, 11, 0.5);
+    }
+    .card-hover:hover .image-zoom {
+      transform: scale(1.05);
+    }
+    .image-zoom {
+      transition: transform 0.4s ease;
+    }
+
+    /* ===== 淡入动画 ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+
+    /* ===== 模态框动画 ===== */
+    .modal-backdrop {
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-content {
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== 分页按钮 ===== */
+    .pagination-btn {
+      transition: all 0.2s ease;
+    }
+    .pagination-btn:hover,
+    .pagination-btn.active {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+    .pagination-btn.active {
+      box-shadow: 0 6px 18px -6px rgba(245, 158, 11, 0.55);
+    }
+
+    /* 筛选按钮激活态：琥珀光晕 */
+    .filter-btn.active {
+      box-shadow: 0 8px 24px -6px rgba(245, 158, 11, 0.5);
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- ===== 导航栏 ===== -->
+  <!-- 布局：左Logo + 中导航(绝对定位居中) + 右汉堡按钮(仅移动端) -->
+  <header id="header" class="nav-scroll fixed top-0 left-0 right-0 z-50 py-2 px-6 text-white">
+    <div class="max-w-7xl mx-auto flex items-center relative">
+
+      <!-- 左侧：Logo（Joy-w.png） -->
+      <a href="#home" class="flex items-center flex-shrink-0 relative z-10">
+        <img src="pic/Joy-left.png" alt="Jwel" class="h-8 md:h-12 w-auto object-contain" />
+      </a>
+
+      <!-- 中间：桌面端导航（绝对定位居中，间距由 space-x-20 控制） -->
+      <nav class="hidden md:flex items-center space-x-20 text-2xl absolute left-1/2 -translate-x-1/2">
+        <a href="#home" class="nav-link font-display font-bold hover:text-amber-100 transition-colors">Home</a>
+        <a href="#portfolio" class="nav-link font-display font-bold hover:text-amber-100 transition-colors">Portfolio</a>
+        <a href="about.html" class="nav-link font-display font-bold hover:text-amber-100 transition-colors">About</a>
+        <a href="contact.html" class="nav-link font-display font-bold hover:text-amber-100 transition-colors">Contact</a>
+      </nav>
+
+      <!-- 右侧：移动端汉堡菜单按钮 -->
+      <button id="menu-btn" class="md:hidden p-2 ml-auto" aria-label="Toggle menu">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- 移动端下拉菜单（默认隐藏，点击汉堡按钮展开） -->
+    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-amber-500 border-t border-amber-600 shadow-lg py-4 px-6">
+      <nav class="flex flex-col space-y-4 text-lg">
+        <a href="#home" class="nav-link font-display font-bold text-white hover:text-amber-100 transition-colors">Home</a>
+        <a href="#portfolio" class="nav-link font-display font-bold text-white hover:text-amber-100 transition-colors">Portfolio</a>
+        <a href="about.html" class="nav-link font-display font-bold text-white hover:text-amber-100 transition-colors">About</a>
+        <a href="contact.html" class="nav-link font-display font-bold text-white hover:text-amber-100 transition-colors">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== 首页 Hero ===== -->
+    <section id="home" class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-20">
+      <div class="absolute inset-0 bg-black"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.3)_0%,rgba(0,0,0,0.7)_15%,rgba(0,0,0,0.95)_60%)]"></div>
+
+      <!-- 背景 Logo 水印：Joy-w.png，半透明嵌入黑色背景中 -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+        <img src="pic/Joy-w.png" alt="" class="w-[85vw] md:w-[70vw] max-w-[1400px] opacity-10 mix-blend-luminosity drop-shadow-[0_0_100px_rgba(245,158,11,0.1)]" />
+      </div>
+
+      <canvas id="particle-canvas" class="absolute inset-0"></canvas>
+
+      <!-- Hero 内容区：flex flex-col items-center justify-center 确保所有元素水平+垂直居中 -->
+      <div class="relative z-10 flex flex-col items-center text-center px-6">
+        <div class="flex items-center justify-center gap-4 mb-5 fade-in">
+          <span class="h-px w-10 bg-accent/60"></span>
+          <p class="font-display font-bold text-accent/90 text-xs md:text-sm uppercase tracking-[0.3em]">Professional Graphic Designer</p>
+          <span class="h-px w-10 bg-accent/60"></span>
+        </div>
+
+        <h1 class="font-display text-6xl md:text-8xl lg:text-9xl font-black text-white mb-6 fade-in delay-1 text-center">
+          DESIGN<br><span class="text-gradient">PORTFOLIO</span>
+        </h1>
+
+        <p class="font-display font-bold text-gray-400 text-lg md:text-xl max-w-2xl mb-10 fade-in delay-2 text-center">
+          Empowering brands through creative and technical graphic design.
+        </p>
+
+        <!-- 按钮组：水平居中，纵向堆叠（移动端）/横向排列（桌面端） -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in delay-3">
+          <a href="#portfolio" class="btn-primary px-8 py-4 font-medium rounded-full">
+            View Portfolio
+          </a>
+          <a href="contact.html" class="btn-ghost px-8 py-4 font-medium rounded-full">
+            Contact Me
+          </a>
+        </div>
+      </div>
+
+      <!-- 向下滚动指示（绝对定位 + translate 确保水平居中在 section 内） -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
+        <a href="#portfolio" class="text-white hover:text-amber-300 transition-colors">
+          <i class="fas fa-chevron-down text-2xl"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== 专业专长（置于作品集之上） ===== -->
+    <section class="relative py-24 px-6 bg-[#0d1117] bg-[radial-gradient(ellipse_55%_45%_at_50%_0%,rgba(245,158,11,0.09),transparent_70%)] bg-no-repeat overflow-hidden">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="text-accent/80 text-xs uppercase tracking-[0.3em] mb-4">Areas of Expertise</p>
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-5">DESIGN EXPERTISE</h2>
+          <div class="w-12 h-[2px] bg-accent mx-auto"></div>
+        </div>
+
+        <!-- 三栏：顶部琥珀渐变线 + 栏间细分隔线，编号/标签常驻琥珀 -->
+        <div class="relative">
+          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent"></div>
+          <div class="grid grid-cols-1 md:grid-cols-3">
+
+            <!-- 01 品牌设计 -->
+            <div class="group py-12 md:px-10 lg:px-12 border-b md:border-b-0 md:border-l border-[#30363d] first:md:border-l-0 transition-colors duration-300 hover:bg-accent/[0.04]">
+              <div class="flex items-baseline gap-5 mb-8">
+                <span class="font-display text-5xl font-bold text-accent/30 group-hover:text-accent transition-colors duration-300">01</span>
+                <span class="text-xs tracking-[0.25em] uppercase text-accent/70 group-hover:text-accent transition-colors duration-300">Brand</span>
+              </div>
+              <h3 class="font-display text-2xl font-bold text-white mb-4 group-hover:text-accent transition-colors duration-300">品牌设计</h3>
+              <p class="text-gray-400 text-sm leading-relaxed max-w-xs">从品牌策略到视觉识别，打造独特品牌形象</p>
+            </div>
+
+            <!-- 02 海报设计 -->
+            <div class="group py-12 md:px-10 lg:px-12 border-b md:border-b-0 md:border-l border-[#30363d] transition-colors duration-300 hover:bg-accent/[0.04]">
+              <div class="flex items-baseline gap-5 mb-8">
+                <span class="font-display text-5xl font-bold text-accent/30 group-hover:text-accent transition-colors duration-300">02</span>
+                <span class="text-xs tracking-[0.25em] uppercase text-accent/70 group-hover:text-accent transition-colors duration-300">Poster</span>
+              </div>
+              <h3 class="font-display text-2xl font-bold text-white mb-4 group-hover:text-accent transition-colors duration-300">海报设计</h3>
+              <p class="text-gray-400 text-sm leading-relaxed max-w-xs">创意海报与宣传物料设计，传递品牌价值</p>
+            </div>
+
+            <!-- 03 印刷设计 -->
+            <div class="group py-12 md:px-10 lg:px-12 md:border-l border-[#30363d] transition-colors duration-300 hover:bg-accent/[0.04]">
+              <div class="flex items-baseline gap-5 mb-8">
+                <span class="font-display text-5xl font-bold text-accent/30 group-hover:text-accent transition-colors duration-300">03</span>
+                <span class="text-xs tracking-[0.25em] uppercase text-accent/70 group-hover:text-accent transition-colors duration-300">Print</span>
+              </div>
+              <h3 class="font-display text-2xl font-bold text-white mb-4 group-hover:text-accent transition-colors duration-300">印刷设计</h3>
+              <p class="text-gray-400 text-sm leading-relaxed max-w-xs">画册、名片、包装等印刷品的专业设计</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 作品集 ===== -->
+    <!--
+      如何添加/替换图片：
+      1. 每个作品卡片由 JS 根据 portfolioData 数组动态生成
+      2. 新作品：在 portfolioData 数组中添加新对象即可
+      3. 图片建议使用 4:3 横屏比例（landscape_4_3），如 1600x1200px
+      4. 本地图片：image 字段填写相对路径，如 "./images/work1.jpg"
+      5. 网络图片：image 字段填写完整 URL
+    -->
+    <section id="portfolio" class="py-24 px-6 bg-[#0d1117]">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="text-accent/80 text-xs uppercase tracking-[0.3em] mb-4">Selected Works</p>
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-5">PORTFOLIO</h2>
+          <div class="w-12 h-[2px] bg-accent mx-auto"></div>
+        </div>
+
+        <!-- 分类筛选 -->
+        <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
+          <button class="filter-btn active px-6 py-2 rounded-full bg-accent text-white font-medium transition-all" data-category="all">全部</button>
+          <button class="filter-btn px-6 py-2 rounded-full border border-[#30363d] text-gray-300 font-medium hover:border-accent hover:text-accent transition-all" data-category="brand">品牌设计</button>
+          <button class="filter-btn px-6 py-2 rounded-full border border-[#30363d] text-gray-300 font-medium hover:border-accent hover:text-accent transition-all" data-category="poster">海报设计</button>
+          <button class="filter-btn px-6 py-2 rounded-full border border-[#30363d] text-gray-300 font-medium hover:border-accent hover:text-accent transition-all" data-category="print">印刷设计</button>
+        </div>
+
+        <!-- 作品网格 -->
+        <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+        <!-- 分页 -->
+        <div id="pagination" class="flex items-center justify-center gap-4 mt-12"></div>
+      </div>
+    </section>
+
+    <!-- ===== 页脚 ===== -->
+    <!-- 极简编辑风：顶部细线收束 + 非对称 12 栏网格 + 眉标索引 -->
+    <footer class="bg-[#0d1117] text-white px-6">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- 主内容区：品牌 5 栏 / 导航 3 栏 / 联系 4 栏，非对称比例避免稀疏漂浮 -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 py-20 border-t border-[#30363d]">
+
+          <!-- 品牌区 -->
+          <div class="md:col-span-5">
+            <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-6">Designer<span class="text-accent">.</span></h3>
+            <p class="text-white/40 text-sm leading-relaxed max-w-sm">
+              专业平面设计师，专注于品牌设计、海报设计与 UI/UX 设计，用创意与技术为品牌赋予独特价值。
+            </p>
+          </div>
+
+          <!-- 站点导航 -->
+          <div class="md:col-span-3">
+            <h4 class="text-xs tracking-[0.25em] uppercase text-gray-500 mb-6">Sitemap</h4>
+            <ul class="space-y-3">
+              <li><a href="#home" class="text-sm text-white/55 hover:text-accent transition-colors duration-300">首页</a></li>
+              <li><a href="#portfolio" class="text-sm text-white/55 hover:text-accent transition-colors duration-300">作品集</a></li>
+              <li><a href="about.html" class="text-sm text-white/55 hover:text-accent transition-colors duration-300">关于我</a></li>
+              <li><a href="contact.html" class="text-sm text-white/55 hover:text-accent transition-colors duration-300">联系我</a></li>
+            </ul>
+          </div>
+
+          <!-- 联系方式：定义列表式，标签在上、值在下，去除填充图标 -->
+          <div class="md:col-span-4">
+            <h4 class="text-xs tracking-[0.25em] uppercase text-gray-500 mb-6">Contact</h4>
+            <ul class="space-y-5">
+              <li>
+                <span class="block text-xs text-gray-600 mb-1">邮箱</span>
+                <a href="mailto:1023926598@qq.com" class="text-sm text-white/70 hover:text-accent transition-colors duration-300">1023926598@qq.com</a>
+              </li>
+              <li>
+                <span class="block text-xs text-gray-600 mb-1">电话</span>
+                <a href="tel:+8617816335673" class="text-sm text-white/70 hover:text-accent transition-colors duration-300">+86 17816335673</a>
+              </li>
+              <li>
+                <span class="block text-xs text-gray-600 mb-1">地址</span>
+                <span class="text-sm text-white/70">浙江省温州市龙湾区</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- 底部栏：细线分隔，版权在左、社交在右 -->
+        <div class="border-t border-[#30363d] py-8 flex flex-col md:flex-row items-center justify-between gap-5">
+          <p class="text-white/30 text-xs tracking-wide">© 2024 Designer Portfolio. All rights reserved.</p>
+          <div class="flex items-center gap-6">
+            <a href="#" aria-label="Behance" class="text-sm text-white/30 hover:text-accent transition-colors duration-300"><i class="fab fa-behance"></i></a>
+            <a href="#" aria-label="Dribbble" class="text-sm text-white/30 hover:text-accent transition-colors duration-300"><i class="fab fa-dribbble"></i></a>
+            <a href="#" aria-label="Instagram" class="text-sm text-white/30 hover:text-accent transition-colors duration-300"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn" class="text-sm text-white/30 hover:text-accent transition-colors duration-300"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- ===== 图片查看模态框 ===== -->
+    <div id="image-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
+      <div class="modal-backdrop absolute inset-0 bg-black/90" id="modal-backdrop"></div>
+      <div class="modal-content relative z-10 max-w-5xl max-h-[90vh] p-4">
+        <button id="modal-close" class="absolute -top-14 right-0 w-10 h-10 rounded-full border border-[#30363d] text-gray-400 hover:text-accent hover:border-accent hover:bg-accent/10 transition-all flex items-center justify-center" aria-label="Close modal">
+          <i class="fas fa-times text-lg"></i>
+        </button>
+        <img id="modal-image" src="" alt="" class="max-w-full max-h-[85vh] object-contain rounded-lg border border-[#30363d]">
+        <div class="mt-5 text-center">
+          <p id="modal-category" class="text-accent text-xs tracking-[0.25em] mb-2"></p>
+          <h3 id="modal-title" class="font-display text-xl font-bold text-white mb-2"></h3>
+          <p id="modal-description" class="text-white/40 text-sm leading-relaxed max-w-2xl mx-auto"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 回到顶部（显隐/点击逻辑见 assets/common.js，阈值 500px） -->
+    <button id="back-to-top" data-offset="500" class="fixed bottom-8 right-8 w-12 h-12 bg-[#161b22] border border-[#30363d] text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible hover:bg-accent hover:border-accent hover:shadow-[0_8px_24px_-6px_rgba(245,158,11,0.5)] transition-all z-40">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </main>
+
+  <script>
+    /* =============================================================
+     * 作品集数据配置
+     * 新增作品：复制一条现有数据，修改 id、title、category 等字段即可
+     * category 可选值：brand(品牌设计)、poster(海报设计)、ui(UI设计)、print(印刷设计)
+     * 图片建议使用 4:3 横屏比例（landscape_4_3）
+     * ============================================================= */
+    const portfolioData = [
+      {
+        id: 1,
+        title: '法式香氛视觉重构',
+        category: 'poster',
+        categoryName: '海报设计',
+        description: '经典香奈儿香水瓶、远景埃菲尔铁塔剪影、暖香槟金/粉裸色背景墙面、侧逆光与柔和自然光影、女性侧脸与身姿的墙面阴影',
+        image: 'pic/chanel.png'
+      },
+      {
+        id: 2,
+        title: '超越，自成新境',
+        category: 'poster',
+        categoryName: '海报设计',
+        description: '苹果极简（Apple Minimal）、未来科技感、暗夜紫、深邃黑、高留白、高级感渐变、非对称构图、极简无衬线体',
+        image: 'pic/iphone14pro.png'
+      },
+      {
+        id: 3,
+        title: '掌心上的意式匠心',
+        category: 'poster',
+        categoryName: '海报设计',
+        description: '老钱风、绅士雅致、复古经典、深棕暗黑色调、香槟金、真皮质感、精致分割符（鸢尾花徽标微缩）',
+        image: 'pic/Wallet.png'
+      },
+      {
+        id: 4,
+        title: '德鲁大叔的篮球之道',
+        category: 'poster',
+        categoryName: '海报设计',
+        description: '美式街头运动风、拼合视觉（Multi-exposure）、多重曝光、经典骑士队红蓝对撞色、高对比度、混凝土斑驳肌理',
+        image: 'pic/irving.png'
+      },
+      {
+        id: 5,
+        title: '韩系松弛感女装穿搭',
+        category: 'poster',
+        categoryName: '海报设计',
+        description: '韩系街头（K-Fashion）、夏日轻时尚、都市松弛感、低饱和度莫兰迪色系、巨型背景水纹字',
+        image: 'pic/clothes.png'
+      },
+      {
+        id: 6,
+        title: '捕捉·连接·创造',
+        category: 'poster',
+        categoryName: '海报设计',
+        description: '佳能SX210IS、暗调质感、极简美学、口袋相机、科技感、光影艺术',
+        image: 'pic/canon.png'
+      },
+    ];
+
+    /* =============================================================
+     * 粒子系统 (Particle System)
+     * -------------------------------------------------------------
+     * 使用 Canvas 2D API 实现的交互式粒子动画背景
+     *
+     * 包含两个类：
+     *   1. SpatialGrid    — 空间网格索引，把粒子按位置分块存储
+     *                       用于把 O(n²) 的碰撞/连线检测降到近 O(n)
+     *   2. ParticleSystem  — 主粒子系统：生成 / 物理更新 / 绘制 / 交互
+     *
+     * 可调参数速查：
+     *   particleCount   — 粒子数量（桌面 180 / 移动 80）
+     *   centerZone      — 中心避让区（文字区域，粒子不进入）
+     *   mouse.radius    — 鼠标斥力影响半径（默认 150px）
+     *   颜色 / 大小 / 速度 — 在 createParticles() 内配置
+     * ============================================================= */
+
+    /* ---------- 空间网格索引 ---------- */
+    // 把画布切成 cellSize×cellSize 的网格，每个粒子只和相邻 3×3 网格
+    // 里的邻居做碰撞/连线检测，避免全量双重循环
+    class SpatialGrid {
+      constructor(width, height, cellSize) {
+        this.cellSize = cellSize;
+        this.cols = Math.ceil(width / cellSize) + 2;
+        this.rows = Math.ceil(height / cellSize) + 2;
+        this.cells = new Map();
+      }
+
+      clear() {
+        this.cells.clear();
+      }
+
+      _key(cx, cy) {
+        return cx * 10000 + cy;
+      }
+
+      insert(particle) {
+        const cx = Math.floor(particle.x / this.cellSize) + 1;
+        const cy = Math.floor(particle.y / this.cellSize) + 1;
+        const k = this._key(cx, cy);
+        let arr = this.cells.get(k);
+        if (!arr) {
+          arr = [];
+          this.cells.set(k, arr);
+        }
+        arr.push(particle);
+        particle._gx = cx;
+        particle._gy = cy;
+      }
+
+      getNeighbors(particle) {
+        const result = [];
+        const cx = particle._gx;
+        const cy = particle._gy;
+        for (let dx = -1; dx <= 1; dx++) {
+          for (let dy = -1; dy <= 1; dy++) {
+            const arr = this.cells.get(this._key(cx + dx, cy + dy));
+            if (arr) {
+              for (const p of arr) {
+                if (p !== particle) result.push(p);
+              }
+            }
+          }
+        }
+        return result;
+      }
+    }
+
+    /* ---------- 主粒子系统 ---------- */
+    class ParticleSystem {
+
+      // 构造函数：绑定 Canvas、初始化配置、生成粒子、启动动画循环
+      constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.particles = [];
+        this.mouse = { x: null, y: null, radius: 150 };
+        this.isMobile = window.innerWidth < 768;
+        this.particleCount = this.isMobile ? 80 : 180;
+        this.grid = new SpatialGrid(canvas.width, canvas.height, 120);
+
+        // 中心避让区：文字区域在此范围内的粒子会被排斥出去
+        // 后续可根据实际文字大小调整宽高
+        this.centerZone = {
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          w: 600,   // 避让区宽度（像素）
+          h: 450,   // 避让区高度（像素）
+          force: 0, // 斥力强度
+        };
+
+        this.resize();
+        this.bindEvents();
+        this.createParticles();
+        this.animate();
+      }
+
+      bindEvents() {
+        window.addEventListener('resize', () => this.resize());
+        window.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+        window.addEventListener('mouseleave', () => this.handleMouseLeave());
+        window.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: true });
+        window.addEventListener('touchend', () => this.handleMouseLeave());
+      }
+
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+        this.grid = new SpatialGrid(this.canvas.width, this.canvas.height, 120);
+        // 更新中心避让区（跟随窗口尺寸）
+        this.centerZone.x = this.canvas.width / 2;
+        this.centerZone.y = this.canvas.height / 2;
+        this.centerZone.w = this.isMobile ? 400 : 600;
+        this.centerZone.h = this.isMobile ? 360 : 460;
+        for (const p of this.particles) {
+          p.x = Math.max(p.size, Math.min(this.canvas.width - p.size, p.x));
+          p.y = Math.max(p.size, Math.min(this.canvas.height - p.size, p.y));
+        }
+      }
+
+      handleMouseMove(e) {
+        const rect = this.canvas.getBoundingClientRect();
+        this.mouse.x = e.clientX - rect.left;
+        this.mouse.y = e.clientY - rect.top;
+      }
+
+      handleTouchMove(e) {
+        const rect = this.canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        this.mouse.x = touch.clientX - rect.left;
+        this.mouse.y = touch.clientY - rect.top;
+      }
+
+      handleMouseLeave() {
+        this.mouse.x = null;
+        this.mouse.y = null;
+      }
+
+      // 判断粒子是否在中心避让区内
+      _isInCenterZone(px, py) {
+        const z = this.centerZone;
+        return px > z.x - z.w / 2 && px < z.x + z.w / 2 &&
+               py > z.y - z.h / 2 && py < z.y + z.h / 2;
+      }
+
+      createParticles() {
+        // 霓虹高鲜艳度粒子：深红、亮橙、金黄、纯白，全部拉满饱和度
+        const colors = ['#ff4500', '#ff6b35', '#ff8c00', '#ffae00', '#ffd700', '#fff8dc', '#ffffff'];
+        this.particles = [];
+
+        for (let i = 0; i < this.particleCount; i++) {
+          const size = Math.random() * 8 + 3;
+          let x, y;
+          // 初始位置：避开中心避让区
+          let attempts = 0;
+          do {
+            x = Math.random() * this.canvas.width;
+            y = Math.random() * this.canvas.height;
+            attempts++;
+          } while (this._isInCenterZone(x, y) && attempts < 50);
+
+          this.particles.push({
+            _id: i,
+            x, y,
+            vx: (Math.random() - 0.5) * 0.8,
+            vy: (Math.random() - 0.5) * 0.8,
+            size,
+            baseSize: size,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            opacity: Math.random() * 0.5 + 0.5,
+            baseOpacity: Math.random() * 0.5 + 0.5,
+          });
+        }
+      }
+
+      update() {
+        const friction = 0.98;
+        const bounce = 0.7;
+        const mouseForce = 0.03;
+
+        this.grid.clear();
+        for (const p of this.particles) {
+          this.grid.insert(p);
+        }
+
+        for (let i = 0; i < this.particles.length; i++) {
+          const p = this.particles[i];
+
+          // 鼠标斥力
+          if (this.mouse.x !== null && this.mouse.y !== null) {
+            const dx = p.x - this.mouse.x;
+            const dy = p.y - this.mouse.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < this.mouse.radius && distance > 0) {
+              const force = (this.mouse.radius - distance) / this.mouse.radius;
+              p.vx += (dx / distance) * force * mouseForce * 15;
+              p.vy += (dy / distance) * force * mouseForce * 15;
+              p.size = p.baseSize * (1 + force * 0.5);
+              p.opacity = Math.min(1, p.baseOpacity + force * 0.3);
+            } else {
+              p.size = p.baseSize + (p.size - p.baseSize) * 0.1;
+              p.opacity = p.baseOpacity + (p.opacity - p.baseOpacity) * 0.1;
+            }
+          }
+
+          // 粒子间碰撞 (使用空间网格优化)
+          const neighbors = this.grid.getNeighbors(p);
+          for (const p2 of neighbors) {
+            // 避免重复检测
+            if (p2 === p || p._collidedWith && p._collidedWith.has(p2)) continue;
+            
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const minDist = p.size + p2.size + 10;
+
+            if (distance < minDist && distance > 0) {
+              const overlap = minDist - distance;
+              const nx = dx / distance;
+              const ny = dy / distance;
+              const totalMass = p.size + p2.size;
+              const pMass = p.size / totalMass;
+              const p2Mass = p2.size / totalMass;
+
+              p.x += nx * overlap * p2Mass;
+              p.y += ny * overlap * p2Mass;
+              p2.x -= nx * overlap * pMass;
+              p2.y -= ny * overlap * pMass;
+
+              const dvx = p.vx - p2.vx;
+              const dvy = p.vy - p2.vy;
+              const dvn = dvx * nx + dvy * ny;
+
+              if (dvn < 0) {
+                p.vx -= dvn * nx * bounce * p2Mass;
+                p.vy -= dvn * ny * bounce * p2Mass;
+                p2.vx += dvn * nx * bounce * pMass;
+                p2.vy += dvn * ny * bounce * pMass;
+              }
+            }
+          }
+          p._collidedWith = new Set(neighbors);
+
+          // 中心避让斥力：粒子接近或进入文字区域时被向外推开
+          const z = this.centerZone;
+          const halfW = z.w / 2;
+          const halfH = z.h / 2;
+          // 计算粒子到避让区最近边的距离
+          const dx2 = Math.max(Math.abs(p.x - z.x) - halfW, 0);
+          const dy2 = Math.max(Math.abs(p.y - z.y) - halfH, 0);
+          const distFromEdge = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+
+          if (distFromEdge < 120) {
+            // 在避让区内部或边缘附近：计算向外的斥力方向
+            let pushX = 0, pushY = 0;
+            if (p.x < z.x - halfW) pushX = -1;
+            else if (p.x > z.x + halfW) pushX = 1;
+            else pushX = (p.x < z.x ? -1 : 1) * 0.3; // 在 x 范围内但超出 y 范围，斜推
+
+            if (p.y < z.y - halfH) pushY = -1;
+            else if (p.y > z.y + halfH) pushY = 1;
+            else pushY = (p.y < z.y ? -1 : 1) * 0.3;
+
+            const inside = this._isInCenterZone(p.x, p.y);
+            const strength = inside ? z.force * 3 : z.force * (80 - distFromEdge) / 80;
+            const mag = Math.sqrt(pushX * pushX + pushY * pushY) || 1;
+            p.vx += (pushX / mag) * strength;
+            p.vy += (pushY / mag) * strength;
+
+            // 如果已经进入避让区内部，直接拉出
+            if (inside) {
+              p.x += (p.x < z.x ? -1 : 1) * 3;
+              p.y += (p.y < z.y ? -1 : 1) * 3;
+            }
+          }
+
+          // 物理更新
+          p.vx *= friction;
+          p.vy *= friction;
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // 边界反弹
+          if (p.x - p.size < 0) { p.x = p.size; p.vx *= -bounce; }
+          if (p.x + p.size > this.canvas.width) { p.x = this.canvas.width - p.size; p.vx *= -bounce; }
+          if (p.y - p.size < 0) { p.y = p.size; p.vy *= -bounce; }
+          if (p.y + p.size > this.canvas.height) { p.y = this.canvas.height - p.size; p.vy *= -bounce; }
+        }
+      }
+
+      draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // 使用叠加混合模式，重叠粒子会相互增亮，产生霓虹发光效果
+        this.ctx.globalCompositeOperation = 'lighter';
+
+        // 绘制粒子（发光半径 = 粒子大小 * 4，增强光晕感）
+        for (const p of this.particles) {
+          const glowSize = p.size * 4;
+          const gradient = this.ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, glowSize);
+          gradient.addColorStop(0, p.color);
+          gradient.addColorStop(0.3, p.color);
+          gradient.addColorStop(1, 'transparent');
+
+          this.ctx.beginPath();
+          this.ctx.arc(p.x, p.y, glowSize, 0, Math.PI * 2);
+          this.ctx.fillStyle = gradient;
+          this.ctx.globalAlpha = p.opacity;
+          this.ctx.fill();
+
+          // 粒子中心亮核（纯白，让粒子有"闪光点"质感）
+          this.ctx.beginPath();
+          this.ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2);
+          this.ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+          this.ctx.fill();
+        }
+
+        // 恢复默认混合模式再画连接线，避免线条过曝
+        this.ctx.globalCompositeOperation = 'source-over';
+        this.ctx.globalAlpha = 1;
+
+        // 绘制连接线 (使用空间网格优化)
+        this.grid.clear();
+        for (const p of this.particles) {
+          this.grid.insert(p);
+        }
+        
+        const drawn = new Set();
+        for (let i = 0; i < this.particles.length; i++) {
+          const p1 = this.particles[i];
+          const neighbors = this.grid.getNeighbors(p1);
+          for (const p2 of neighbors) {
+            const key = p1._id + '-' + p2._id;
+            const keyRev = p2._id + '-' + p1._id;
+            if (drawn.has(key) || drawn.has(keyRev)) continue;
+            drawn.add(key);
+
+            const dx = p1.x - p2.x;
+            const dy = p1.y - p2.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 120) {
+              this.ctx.beginPath();
+              this.ctx.moveTo(p1.x, p1.y);
+              this.ctx.lineTo(p2.x, p2.y);
+              this.ctx.strokeStyle = `rgba(255, 107, 53, ${(120 - distance) / 120 * 0.45})`;
+              this.ctx.lineWidth = 0.5;
+              this.ctx.stroke();
+            }
+          }
+        }
+      }
+
+      // 动画主循环：requestAnimationFrame 驱动
+      animate() {
+        this.update();
+        this.draw();
+        requestAnimationFrame(() => this.animate());
+      }
+    }
+
+    /* =============================================================
+     * 作品集管理器
+     * 负责作品网格渲染、分页、筛选、模态框
+     * ============================================================= */
+    class PortfolioManager {
+      constructor(data, options = {}) {
+        this.data = data;
+        this.itemsPerPage = options.itemsPerPage || 6;
+        this.currentCategory = 'all';
+        this.currentPage = 1;
+
+        this.grid = document.getElementById('portfolio-grid');
+        this.pagination = document.getElementById('pagination');
+
+        this.init();
+      }
+
+      init() {
+        this.bindFilterEvents();
+        this.loadPage();
+      }
+
+      bindFilterEvents() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            filterButtons.forEach(b => {
+              b.classList.remove('active', 'bg-accent', 'text-white');
+              b.classList.add('border', 'border-[#30363d]', 'text-gray-300');
+            });
+            btn.classList.add('active', 'bg-accent', 'text-white');
+            btn.classList.remove('border', 'border-[#30363d]', 'text-gray-300');
+
+            this.currentCategory = btn.dataset.category;
+            this.currentPage = 1;
+            this.loadPage();
+          });
+        });
+      }
+
+      getFilteredItems() {
+        return this.currentCategory === 'all'
+          ? this.data
+          : this.data.filter(item => item.category === this.currentCategory);
+      }
+
+      renderPortfolio(items) {
+        this.grid.innerHTML = '';
+
+        items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'portfolio-card group card-hover bg-[#161b22] border border-transparent hover:border-accent/50 rounded-2xl overflow-hidden';
+          card.dataset.id = item.id;
+
+          card.innerHTML = `
+            <div class="relative overflow-hidden aspect-[4/3]">
+              <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover image-zoom">
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                <button class="view-btn btn-primary px-6 py-3 rounded-full font-medium flex items-center gap-2" data-id="${item.id}">
+                  <i class="fas fa-eye"></i> 查看详情
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <span class="inline-flex items-center gap-2 text-accent text-xs font-medium tracking-[0.2em]">
+                <span class="w-4 h-px bg-accent/70"></span>${item.categoryName}
+              </span>
+              <h3 class="font-display text-xl font-semibold text-white mt-3 mb-2">${item.title}</h3>
+              <p class="text-gray-400 text-sm leading-relaxed line-clamp-2">${item.description}</p>
+            </div>
+          `;
+
+          this.grid.appendChild(card);
+        });
+
+        this.bindViewListeners();
+      }
+
+      renderPagination(totalItems) {
+        this.pagination.innerHTML = '';
+        const totalPages = Math.ceil(totalItems / this.itemsPerPage);
+
+        if (totalPages <= 1) return;
+
+        // 上一页
+        const prevBtn = document.createElement('button');
+        prevBtn.className = `pagination-btn px-4 py-2 rounded-full border border-[#30363d] text-gray-300 ${this.currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`;
+        prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        prevBtn.addEventListener('click', () => {
+          if (this.currentPage > 1) {
+            this.currentPage--;
+            this.loadPage();
+          }
+        });
+        this.pagination.appendChild(prevBtn);
+
+        // 页码
+        for (let i = 1; i <= totalPages; i++) {
+          const pageBtn = document.createElement('button');
+          pageBtn.className = `pagination-btn px-4 py-2 rounded-full border border-[#30363d] text-gray-300 ${i === this.currentPage ? 'active' : ''}`;
+          pageBtn.textContent = i;
+          pageBtn.addEventListener('click', () => {
+            this.currentPage = i;
+            this.loadPage();
+          });
+          this.pagination.appendChild(pageBtn);
+        }
+
+        // 下一页
+        const nextBtn = document.createElement('button');
+        nextBtn.className = `pagination-btn px-4 py-2 rounded-full border border-[#30363d] text-gray-300 ${this.currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`;
+        nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        nextBtn.addEventListener('click', () => {
+          if (this.currentPage < totalPages) {
+            this.currentPage++;
+            this.loadPage();
+          }
+        });
+        this.pagination.appendChild(nextBtn);
+      }
+
+      loadPage() {
+        const filteredItems = this.getFilteredItems();
+        const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+        const paginatedItems = filteredItems.slice(startIndex, startIndex + this.itemsPerPage);
+
+        this.renderPortfolio(paginatedItems);
+        this.renderPagination(filteredItems.length);
+      }
+
+      bindViewListeners() {
+        const viewButtons = document.querySelectorAll('.view-btn');
+        viewButtons.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const card = btn.closest('.portfolio-card');
+            const img = card.querySelector('img');
+            const category = card.querySelector('span').textContent;
+            const title = card.querySelector('h3').textContent;
+            const description = card.querySelector('p').textContent;
+
+            this.openModal({
+              image: img.src,
+              title,
+              categoryName: category,
+              description,
+            });
+          });
+        });
+      }
+
+      openModal(item) {
+        const modal = document.getElementById('image-modal');
+        document.getElementById('modal-image').src = item.image;
+        document.getElementById('modal-image').alt = item.title;
+        document.getElementById('modal-title').textContent = item.title;
+        document.getElementById('modal-category').textContent = item.categoryName;
+        document.getElementById('modal-description').textContent = item.description;
+
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      closeModal() {
+        document.getElementById('image-modal').classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      bindModalEvents() {
+        document.getElementById('modal-close').addEventListener('click', () => this.closeModal());
+        document.getElementById('modal-backdrop').addEventListener('click', () => this.closeModal());
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') this.closeModal();
+        });
+      }
+    }
+
+    /* =============================================================
+     * 页面交互控制器
+     * 处理导航、回到顶部、淡入动画、联系表单等
+     * ============================================================= */
+    class PageController {
+      constructor() {
+        this.initParticleSystem();
+        this.initPortfolio();
+        this.initFadeObserver();
+        this.bindContactForm();
+        // 移动菜单 / 滚动加深 / 回到顶部 → assets/common.js
+      }
+
+      initParticleSystem() {
+        const canvas = document.getElementById('particle-canvas');
+        if (canvas) {
+          new ParticleSystem(canvas);
+        }
+      }
+
+      initPortfolio() {
+        this.portfolio = new PortfolioManager(portfolioData, { itemsPerPage: 6 });
+        this.portfolio.bindModalEvents();
+      }
+
+      initFadeObserver() {
+        const elements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        elements.forEach(el => observer.observe(el));
+      }
+
+      bindContactForm() {
+        const form = document.getElementById('contact-form');
+        if (!form) return; // 表单已移至独立的 contact.html
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const formData = new FormData(form);
+          console.log('Form submitted:', Object.fromEntries(formData));
+          alert('感谢您的留言！我会尽快回复您。');
+          form.reset();
+        });
+      }
+    }
+
+    // 启动应用
+    new PageController();
+  </script>
+
+  <!-- 全站共享交互：导航滚动加深、移动菜单、回到顶部 -->
+  <script src="assets/common.js"></script>
+</body>
+</html>
