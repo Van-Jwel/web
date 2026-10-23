@@ -1,0 +1,150 @@
+/* =============================================================
+   common.css — 全站共享样式（index / about / contact 三页通用）
+   包含：本地字体、设计变量、基础排版、导航栏、统一按钮、
+        表单输入框、滚动条
+   字体文件位于上级目录 ../font/
+   ============================================================= */
+
+/* —— Now 本地字体 —— */
+@font-face {
+  font-family: 'Now';
+  src: url('../font/Now-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Now';
+  src: url('../font/Now-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Now';
+  src: url('../font/Now-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Now';
+  src: url('../font/Now-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== 设计变量 ===== */
+:root {
+  --bg-dark: #0d1117;
+  --bg-card: #161b22;
+  --bg-card-hover: #21262d;
+  --border: #30363d;
+  --accent: #f59e0b;
+  --accent-hover: #d97706;
+  --text-muted: #6b7280;
+  --text-secondary: #9ca3af;
+}
+
+/* ===== 基础排版 ===== */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', 'Microsoft YaHei', 'PingFang SC', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-dark);
+  color: #ffffff;
+}
+
+/* 标题字体：字重交给 Tailwind 的 font-bold/-black 匹配 @font-face */
+.font-display {
+  font-family: 'Now', 'Microsoft YaHei', 'PingFang SC', 'SimHei', sans-serif !important;
+}
+
+/* ===== 导航栏：半透明琥珀底，滚动后加深 ===== */
+.nav-scroll {
+  background-color: rgba(245, 158, 11, 0.92);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+.nav-scroll.scrolled {
+  background-color: rgba(245, 158, 11, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+
+/* 导航链接下划线：中心向两侧展开；.current 为当前页常驻高亮 */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0.08em;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  transform: translateX(-50%) scaleX(0);
+  transition: transform 0.3s ease;
+}
+.nav-link:hover::after,
+.nav-link.current::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* ===== 统一按钮体系（琥珀极简风） ===== */
+.btn-primary {
+  background-color: var(--accent);
+  color: #ffffff;
+  border: 1px solid transparent;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  box-shadow: 0 12px 32px -10px rgba(245, 158, 11, 0.6);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: rgba(245, 158, 11, 0.06);
+  transform: translateY(-2px);
+}
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===== 表单输入框：focus 琥珀光晕 ===== */
+.form-input {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+/* 校验错误态：红色描边与光晕（优先级覆盖 focus 琥珀态） */
+.form-input.is-error,
+.form-input.is-error:focus {
+  border-color: rgba(248, 113, 113, 0.75);
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.12);
+}
+
+/* ===== 滚动条 ===== */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: #484f58; }
